@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="{{ asset('union/css/style.css') }}">
 </head>
 
+
 <body>
 
   <!-- NAVBAR -->
@@ -32,6 +33,7 @@
           <a href="{{ route('union.home') }}#sports">Sports</a>
           <a href="{{ route('union.home') }}#menu">Menu</a>
           <a href="{{ route('union.home') }}#eventos">Eventos</a>
+          <a href="{{ route('union.reservas') }}">Reservas</a>
           <a href="{{ route('union.home') }}#contactos">Contactos</a>
         </nav>
 
@@ -64,6 +66,7 @@
         <a href="{{ route('union.home') }}#sports">Sports</a>
         <a href="{{ route('union.home') }}#menu">Menu</a>
         <a href="{{ route('union.home') }}#eventos">Eventos</a>
+        <a href="{{ route('union.reservas') }}">Reservas</a>
         <a href="{{ route('union.home') }}#contactos">Contactos</a>
 
         <div class="uc-mobile-social" style="display:flex; gap:10px; padding-top:10px;">
@@ -118,8 +121,24 @@
         <div>
           <div class="uc-footer-heading">Contactos</div>
           <p class="uc-footer-text" style="margin-bottom:8px;">Fernão Ferro, Seixal</p>
-          <p class="uc-footer-text" style="margin-bottom:8px;">Email: rematedecisivo@gmail.com</p>
-          <p class="uc-footer-text" style="margin-bottom:0;">Tel: 912 345 678</p>
+
+          @if(config('union.email'))
+            <p class="uc-footer-text" style="margin-bottom:8px;">
+              Email:
+              <a href="mailto:{{ config('union.email') }}" style="text-decoration: underline;">
+                {{ config('union.email') }}
+              </a>
+            </p>
+          @endif
+
+          @if(config('union.phone'))
+            <p class="uc-footer-text" style="margin-bottom:0;">
+              Tel:
+              <a href="tel:{{ preg_replace('/\s+/', '', config('union.phone')) }}" style="text-decoration: underline;">
+                {{ config('union.phone') }}
+              </a>
+            </p>
+          @endif
         </div>
 
       </div>
@@ -133,6 +152,7 @@
     </div>
   </footer>
 
+  
   <script src="{{ asset('union/js/main.js') }}"></script>
 </body>
 </html>

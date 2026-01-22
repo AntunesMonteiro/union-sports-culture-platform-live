@@ -28,7 +28,7 @@
           </p>
 
           <div class="uc-hero-actions">
-            <a class="uc-btn" href="{{ route('reservations.create') }}">Reservar mesa</a>
+            <a class="uc-btn" href="{{ route('union.reservas') }}">Reservas (telefone / e-mail)</a>
             <a class="uc-btn-ghost" href="#menu">Ver menu</a>
           </div>
 

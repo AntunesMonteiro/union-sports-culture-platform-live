@@ -23,11 +23,24 @@ Route::get('/', function () {
     ]);
 })->name('union.home');
 
-Route::get('/reservas/nova', [ReservationController::class, 'create'])
-    ->name('reservations.create');
+/**
+ * Página real (produção): reservas só por telefone/e-mail
+ */
+Route::get('/reservas', function () {
+    return view('union.reservas');
+})->name('union.reservas');
 
-Route::post('/reservas', [ReservationController::class, 'store'])
-    ->name('reservations.store');
+/**
+ * Sistema académico (guardado) — só fica acessível se FEATURE_BOOKING=true
+ * Se FEATURE_BOOKING=false, estas rotas ficam 404 (invisíveis).
+ */
+Route::middleware('feature:booking')->group(function () {
+    Route::get('/reservas/nova', [ReservationController::class, 'create'])
+        ->name('reservations.create');
+
+    Route::post('/reservas', [ReservationController::class, 'store'])
+        ->name('reservations.store');
+});
 
 
 /* AUTH / DASHBOARD (Breeze) */
